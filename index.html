@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CNS : Bulk QR Tools (Testing)</title>
+    <title>CNS : Bulk QR Tools (Fixed 320px)</title>
     
     <meta name="theme-color" content="#0046be">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -22,7 +22,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS Design System (Original) --- */
+        /* --- CSS Design System --- */
         :root {
             --primary: #0f172a; --accent: #0046be; --accent-hover: #003399;
             --bg: #f3f6fc; --sidebar-bg: #ffffff; --text-main: #1e293b; --text-sec: #64748b;
@@ -80,9 +80,6 @@
         .panel-header h2 { color: var(--accent); margin: 0; display: flex; align-items: center; gap: 12px; font-size: 1.5rem; }
         .tool-desc { color: var(--text-sec); margin: 5px 0 0 0; font-size: 0.95rem; }
 
-        .btn-reset { background: transparent; color: var(--text-sec); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
-        .btn-reset:hover { border-color: var(--danger); color: var(--danger); background: rgba(239, 68, 68, 0.1); }
-
         /* --- CARD & PREVIEW --- */
         .card { 
             background: var(--card-bg); border-radius: 12px; padding: 2rem; 
@@ -94,12 +91,9 @@
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-main); font-size: 0.9rem; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'Sarabun', sans-serif; outline: none; transition: border 0.2s; font-size: 0.95rem; background: var(--input-bg); color: var(--text-main); }
-        .form-group textarea { resize: vertical; min-height: 80px; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 70, 190, 0.1); }
-        .form-group input:disabled { background-color: var(--drop-bg); color: var(--text-sec); cursor: not-allowed; }
-
-        /* --- BULK TOOL CSS --- */
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'Sarabun', sans-serif; outline: none; transition: border 0.2s; font-size: 0.95rem; background: var(--input-bg); color: var(--text-main); }
+        .form-group input:focus, .form-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 70, 190, 0.1); }
+        
         .instruction-box { background: rgba(0, 70, 190, 0.05); border-radius: 10px; padding: 1rem 1.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(0, 70, 190, 0.1); }
         .instruction-title { font-weight: 700; color: var(--accent); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 1rem; }
         .step-list { margin: 0; padding-left: 20px; color: var(--text-sec); font-size: 0.95rem; line-height: 1.6; }
@@ -110,22 +104,23 @@
         .upload-icon { font-size: 3rem; color: var(--accent); }
         .upload-text { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
         .upload-sub { font-size: 0.9rem; color: var(--text-sec); }
+        
         .preview-container { margin-top: 20px; overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; display: none; }
         .bulk-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
         .bulk-table th { background: var(--drop-bg); color: var(--text-main); font-weight: 700; text-align: left; padding: 12px; border-bottom: 2px solid var(--border); white-space: nowrap; }
         .bulk-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-sec); vertical-align: middle; }
+        
         .progress-container { margin-top: 20px; display: none; }
         .progress-bar-bg { width: 100%; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
         .progress-bar-fill { height: 100%; background: var(--success); width: 0%; transition: width 0.2s; }
         .progress-text { text-align: center; font-size: 0.9rem; margin-top: 5px; color: var(--text-main); }
 
-        /* --- ACTION FOOTER --- */
         .action-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); }
         .btn-action { width: 100%; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); color: #fff; padding: 15px; border: none; border-radius: 10px; font-size: 1.05rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.2s; font-family: 'Sarabun', sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .btn-action:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 70, 190, 0.3); }
         .btn-action:disabled { background: var(--text-sec); cursor: not-allowed; transform: none; box-shadow: none; }
-        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); font-weight: 600; padding: 10px; }
-        .btn-outline:hover { background: var(--drop-bg); border-color: var(--accent); color: var(--accent); box-shadow: none; }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); font-weight: 600; padding: 10px; display:flex; align-items:center; cursor:pointer; gap:8px; border-radius:8px;}
+        .btn-outline:hover { background: var(--drop-bg); border-color: var(--accent); color: var(--accent); }
 
         .privacy-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-top: 1rem; width: fit-content; border: 1px solid rgba(16, 185, 129, 0.2); }
         
@@ -133,10 +128,8 @@
         .toast { pointer-events: auto; background: var(--card-bg); color: var(--text-main); padding: 14px 20px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); display: flex; align-items: center; gap: 12px; animation: slideUp 0.3s; border-left: 5px solid var(--accent); min-width: 280px; font-weight: 600; font-size: 0.95rem; }
         .toast.success { border-left-color: var(--success); }
         .toast.error { border-left-color: var(--danger); }
-        
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* Responsive */
         @media (max-width: 768px) { 
             .menu-toggle { display: block; } 
             aside { position: fixed; top: 0; left: 0; height: 100%; transform: translateX(-100%); box-shadow: 10px 0 20px rgba(0,0,0,0.1); } 
@@ -144,14 +137,12 @@
             main { padding: 5rem 1rem 2rem 1rem; } 
             .card { min-height: auto; padding: 1.5rem; } 
             .grid-2 { grid-template-columns: 1fr; gap: 1rem; } 
-            .top-controls { top: 15px; right: 15px; } 
-            .control-btn { padding: 6px 12px; } 
             .menu-overlay.active { display: block; } 
         }
         
         .menu-toggle { display: none; position: fixed; top: 20px; left: 20px; z-index: 1001; background: var(--accent); color: #fff; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 800; backdrop-filter: blur(2px); }
-        ::-webkit-scrollbar { width: 8px; height: 8px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: var(--drop-border); border-radius: 4px; } ::-webkit-scrollbar-thumb:hover { background: var(--text-sec); }
+        ::-webkit-scrollbar { width: 8px; height: 8px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: var(--drop-border); border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -188,7 +179,7 @@
                     <ul class="step-list">
                         <li data-i18n="step_1">1. เตรียมไฟล์ Excel (.xlsx) ที่มีข้อมูลใน Column A</li>
                         <li data-i18n="step_2">2. อัปโหลดไฟล์ที่เตรียมไว้ลงในช่องด้านล่าง</li>
-                        <li data-i18n="step_3">3. กดปุ่ม "สร้างและดาวน์โหลด" ระบบจะสร้าง QR Code ใส่ไฟล์ Excel ให้ทันที</li>
+                        <li data-i18n="step_3">3. ตั้งค่ารูปแบบ และกดปุ่ม 'สร้างและดาวน์โหลด'</li>
                     </ul>
                 </div>
 
@@ -203,6 +194,11 @@
                         <i class="fas fa-arrow-left"></i> <span data-i18n="btn_reupload">อัปโหลดไฟล์ใหม่ (Upload New File)</span>
                     </button>
 
+                    <div style="margin-bottom:15px; display:flex; gap:10px;">
+                        <span class="privacy-badge" style="margin-top:0;"><i class="fas fa-file-alt"></i> <span id="file-name-display">filename.xlsx</span></span>
+                        <span class="privacy-badge" style="margin-top:0;"><i class="fas fa-list-ol"></i> <span id="row-count-display">0 rows</span></span>
+                    </div>
+
                     <div class="grid-2">
                         <div class="form-group">
                             <label data-i18n="lbl_col">เลือกคอลัมน์ข้อมูล (Column)</label>
@@ -210,7 +206,7 @@
                         </div>
                         <div class="form-group">
                             <label>ระดับความทนทาน (ECC Level)</label>
-                            <select id="bulk-ecc">
+                            <select id="bulk-ecc" onchange="updatePreview()">
                                 <option value="L">L (7%)</option>
                                 <option value="M" selected>M (15%)</option>
                                 <option value="Q">Q (25%)</option>
@@ -218,20 +214,36 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>คำนำหน้า (Prefix) <small style="color:var(--text-sec); font-weight:400;">(เช่น https://)</small></label>
+                            <input type="text" id="bulk-prefix" placeholder="ว่างไว้หากไม่ต้องการ" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group">
+                            <label>คำต่อท้าย (Suffix)</label>
+                            <input type="text" id="bulk-suffix" placeholder="ว่างไว้หากไม่ต้องการ" oninput="updatePreview()">
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:1.5rem;">
+                        <label>สี QR / พื้นหลัง (Color / Background)</label>
+                        <div style="display:flex; gap:10px;">
+                            <input type="color" id="bulk-color-dark" value="#000000" style="flex:1; height:45px; cursor:pointer;" onchange="updatePreview()" title="QR Color">
+                            <input type="color" id="bulk-color-light" value="#ffffff" style="flex:1; height:45px; cursor:pointer;" onchange="updatePreview()" title="Background Color">
+                        </div>
+                    </div>
                     
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top:1.5rem;">
                         <label>ชื่อไฟล์ผลลัพธ์ (ไม่ต้องใส่ .xlsx)</label>
                         <input type="text" id="bulk-filename" placeholder="CNS_Result">
                     </div>
 
-                    <div style="margin-top:15px; display:flex; gap:10px;">
-                        <span class="privacy-badge" style="background:var(--drop-bg); color:var(--text-sec); border:1px solid var(--border); border-radius:4px; padding:5px 10px; font-size:0.8rem;"><i class="fas fa-file-alt"></i> <span id="file-name-display">filename.xlsx</span></span>
-                        <span class="privacy-badge" style="background:var(--drop-bg); color:var(--text-sec); border:1px solid var(--border); border-radius:4px; padding:5px 10px; font-size:0.8rem;"><i class="fas fa-list-ol"></i> <span id="row-count-display">0 rows</span></span>
-                    </div>
-
-                    <h4 style="margin-top:20px; color:var(--text-main);" data-i18n="lbl_preview">ตัวอย่างข้อมูล (5 รายการแรก)</h4>
+                    <h4 style="margin-top:20px; color:var(--text-main); display:flex; align-items:center; gap:8px;">
+                        <i class="fas fa-eye"></i> <span data-i18n="lbl_preview">ตัวอย่างข้อมูล (5 รายการแรก)</span>
+                    </h4>
                     <div class="preview-container" style="display:block;">
-                        <table id="preview-table" class="bulk-table"><thead><tr><th>No.</th><th>Data</th><th>QR Preview</th></tr></thead><tbody></tbody></table>
+                        <table id="preview-table" class="bulk-table"><thead><tr><th>No.</th><th>Data & Final URL</th><th>QR Preview</th></tr></thead><tbody></tbody></table>
                     </div>
 
                     <div class="progress-container" id="progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill"></div></div><div class="progress-text" id="progress-text">Processing 0/0...</div></div>
@@ -239,7 +251,6 @@
                 </div>
             </div>
         </div>
-
     </main>
 
     <div id="toast-container"></div>
@@ -247,22 +258,18 @@
     <script>
         const i18n = {
             th: {
-                grp_bulk: "Batch Processing",
-                menu_bulk: "QR จากไฟล์ (Bulk Excel)",
+                grp_bulk: "Batch Processing", menu_bulk: "QR จากไฟล์ (Bulk Excel)",
                 title_bulk: "Bulk QR Generator", desc_bulk: "สร้าง QR Code จำนวนมากจากไฟล์แนบ พร้อมส่งออกเป็น Excel",
-                lbl_instruction: "คู่มือการใช้งาน (Instructions)", step_1: "1. เตรียมไฟล์ Excel (.xlsx) ที่มีข้อมูลใน Column A", step_2: "2. อัปโหลดไฟล์ที่เตรียมไว้ลงในช่องด้านล่าง", step_3: "3. กดปุ่ม 'สร้างและดาวน์โหลด' ระบบจะสร้าง QR Code ใส่ไฟล์ Excel ให้ทันที", 
+                lbl_instruction: "คู่มือการใช้งาน (Instructions)", step_1: "1. เตรียมไฟล์ Excel (.xlsx) ที่มีข้อมูลใน Column A", step_2: "2. อัปโหลดไฟล์ที่เตรียมไว้ลงในช่องด้านล่าง", step_3: "3. ตั้งค่ารูปแบบ และกดปุ่ม 'สร้างและดาวน์โหลด'", 
                 lbl_drop: "คลิก หรือ ลากไฟล์มาวางที่นี่", lbl_support: "รองรับ Excel (.xlsx), CSV, หรือ Text File (.txt)", lbl_col: "เลือกคอลัมน์ข้อมูลที่จะทำ QR", lbl_preview: "ตัวอย่างข้อมูล (5 แถวแรก)", btn_process: "สร้างและดาวน์โหลด Excel", btn_reupload: "อัปโหลดไฟล์ใหม่ (Upload New File)", msg_load_ok: "อ่านไฟล์เรียบร้อย", msg_process_start: "กำลังประมวลผล กรุณารอสักครู่...", msg_complete: "เสร็จสิ้น! กำลังดาวน์โหลด", msg_error: "เกิดข้อผิดพลาดในการอ่านไฟล์", msg_no_data: "ไม่พบข้อมูลในไฟล์",
-                btn_copy: "คัดลอกรูป", btn_download: "ดาวน์โหลด", btn_reset: "ล้างค่า",
-                msg_copy_ok: "คัดลอกรูปเรียบร้อย", msg_offline: "ไม่สามารถโหลด Libraries ได้ กรุณาเชื่อมต่ออินเทอร์เน็ต"
+                msg_offline: "ไม่สามารถโหลด Libraries ได้ กรุณาเชื่อมต่ออินเทอร์เน็ต"
             },
             en: {
-                grp_bulk: "Batch Processing",
-                menu_bulk: "Bulk QR from File",
+                grp_bulk: "Batch Processing", menu_bulk: "Bulk QR from File",
                 title_bulk: "Bulk QR Generator", desc_bulk: "Convert codes/text from Excel/Text file to QR Codes instantly",
-                lbl_instruction: "Instructions", step_1: "1. Prepare Excel file with data in Column A", step_2: "2. Upload your file below", step_3: "3. Click 'Generate & Download' to get Excel with QR Codes",
+                lbl_instruction: "Instructions", step_1: "1. Prepare Excel file with data in Column A", step_2: "2. Upload your file below", step_3: "3. Configure settings and click 'Generate & Download'",
                 lbl_drop: "Click or Drop file here", lbl_support: "Supports Excel (.xlsx), CSV, or Text File (.txt)", lbl_col: "Select Data Column", lbl_preview: "Data Preview (First 5 rows)", btn_process: "Generate & Download Excel", btn_reupload: "Upload New File", msg_load_ok: "File loaded successfully", msg_process_start: "Processing... Please wait", msg_complete: "Done! Downloading...", msg_error: "Error reading file", msg_no_data: "No data found",
-                btn_copy: "Copy Image", btn_download: "Download", btn_reset: "Reset",
-                msg_copy_ok: "Copied successfully", msg_offline: "Cannot load libraries. Please check internet."
+                msg_offline: "Cannot load libraries. Please check internet."
             }
         };
 
@@ -271,7 +278,6 @@
         let excelHeader = [];
         let isExcel = false;
 
-        // --- UI FUNCTIONS ---
         function applyLanguage(){
             document.getElementById('lang-label').innerText = curLang.toUpperCase();
             document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -288,12 +294,9 @@
             localStorage.setItem('cns_gen_theme', newTheme);
         }
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.querySelector('.menu-overlay').classList.toggle('active'); }
-        
         function switchTab(id, btn) {
             document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
-            const panel = document.getElementById(id);
-            if(panel) panel.classList.add('active');
-            
+            const panel = document.getElementById(id); if(panel) panel.classList.add('active');
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
             if(btn) btn.classList.add('active');
             if(window.innerWidth <= 768) toggleSidebar();
@@ -301,7 +304,6 @@
 
         function toast(m, type='success'){ const c=document.getElementById('toast-container'), e=document.createElement('div'); e.className=`toast ${type}`; e.innerHTML=`<i class="fas fa-${type==='success'?'check-circle':'exclamation-circle'}"></i><span>${m}</span>`; c.appendChild(e); setTimeout(()=>e.remove(),3000); }
 
-        // --- BULK FUNCTIONS ---
         function resetBulkUI() {
             document.getElementById('settings-area').style.display = 'none';
             document.getElementById('drop-zone').style.display = 'flex';
@@ -309,11 +311,9 @@
             document.getElementById('file-input').value = ''; 
             document.getElementById('progress-container').style.display = 'none';
             document.getElementById('btn-process').disabled = false;
-            globalData = [];
-            excelHeader = [];
+            globalData = []; excelHeader = [];
             document.querySelector('#preview-table tbody').innerHTML = ''; 
             document.getElementById('row-count-display').innerText = '0 rows';
-            document.getElementById('file-name-display').innerText = 'filename.xlsx';
         }
 
         const dropZone = document.getElementById('drop-zone');
@@ -328,12 +328,12 @@
             if (!file) return;
             const reader = new FileReader();
             const fileName = file.name;
-            const ext = fileName.split('.').pop().toLowerCase();
             document.getElementById('file-name-display').innerText = fileName;
             
             reader.onload = function(e) {
                 const data = e.target.result;
                 globalData = []; excelHeader = [];
+                const ext = fileName.split('.').pop().toLowerCase();
 
                 if (ext === 'txt') {
                     isExcel = false;
@@ -364,7 +364,7 @@
                     toast(i18n[curLang].msg_load_ok);
                 }
             };
-            if (ext === 'txt') reader.readAsText(file); else reader.readAsBinaryString(file);
+            if (fileName.endsWith('txt')) reader.readAsText(file); else reader.readAsBinaryString(file);
         }
 
         function setupColumns(headers) {
@@ -374,20 +374,39 @@
 
         async function updatePreview() {
             const colIndex = parseInt(document.getElementById('col-select').value);
+            const prefix = document.getElementById('bulk-prefix').value || "";
+            const suffix = document.getElementById('bulk-suffix').value || "";
+            const ecc = document.getElementById('bulk-ecc').value;
+            const colorDark = document.getElementById('bulk-color-dark').value;
+            const colorLight = document.getElementById('bulk-color-light').value;
+
             const tbody = document.querySelector('#preview-table tbody'); tbody.innerHTML = '';
             const previewCount = Math.min(globalData.length, 5);
+            
             for (let i = 0; i < previewCount; i++) {
                 const row = globalData[i];
-                const textVal = row[colIndex] || "";
+                const rawText = row[colIndex] || "";
+                const finalText = prefix + rawText + suffix;
                 const tr = document.createElement('tr');
+                
                 let qrImgHtml = '<span style="color:#ccc;">...</span>';
-                if(textVal) {
+                if(finalText) {
                     try {
-                        const url = await HeadlessQRCode.toDataURL(String(textVal), { width: 50, margin: 1 });
-                        qrImgHtml = `<img src="${url}" style="width:50px; border-radius:4px;">`;
+                        const url = await HeadlessQRCode.toDataURL(String(finalText), { 
+                            width: 60, margin: 1, 
+                            errorCorrectionLevel: ecc,
+                            color: { dark: colorDark, light: colorLight }
+                        });
+                        qrImgHtml = `<img src="${url}" style="width:60px; border-radius:4px; border:1px solid #ddd;">`;
                     } catch(e) {}
                 }
-                tr.innerHTML = `<td>${i + 1}</td><td style="max-width:200px; overflow:hidden; text-overflow:ellipsis;">${textVal}</td><td>${qrImgHtml}</td>`;
+                
+                tr.innerHTML = `<td>${i + 1}</td>
+                    <td>
+                        <div style="font-weight:600; color:var(--text-main);">${rawText}</div>
+                        ${(prefix || suffix) ? `<div style="font-size:0.8em; color:var(--accent); margin-top:2px;">➥ ${finalText}</div>` : ''}
+                    </td>
+                    <td>${qrImgHtml}</td>`;
                 tbody.appendChild(tr);
             }
         }
@@ -397,16 +416,28 @@
             const progressContainer = document.getElementById('progress-container');
             const fill = document.getElementById('progress-fill');
             const txt = document.getElementById('progress-text');
-            const colIndex = parseInt(document.getElementById('col-select').value);
             
-            const qrSize = 150; 
-            const rowHeightPx = 230;
-            const colWidthPx = 210; 
+            const colIndex = parseInt(document.getElementById('col-select').value);
+            const prefix = document.getElementById('bulk-prefix').value || "";
+            const suffix = document.getElementById('bulk-suffix').value || "";
+            
             const ecc = document.getElementById('bulk-ecc').value;
+            const colorDark = document.getElementById('bulk-color-dark').value;
+            const colorLight = document.getElementById('bulk-color-light').value;
+            
             let filename = document.getElementById('bulk-filename').value || "CNS_QR_Result";
-            filename = filename.replace(/[^a-z0-9_.-]/gi, '_'); 
-            const rowOffset = 40 / 230; 
-            const colOffset = 30 / 210;
+            filename = filename.replace(/[^a-z0-9_.-]/gi, '_');
+
+            // --- FIXED DIMENSIONS: 320px Cell, 250px QR ---
+            const cellTargetPx = 320; 
+            const qrSize = 200; // Fixed size per request (High Quality within 320px)
+            
+            // ExcelJS Units
+            const rowHeightPt = cellTargetPx * 0.75; 
+            const colWidthChars = 30; // ~320px
+
+            // Calculate Center Offset ratio
+            const offsetRatio = (cellTargetPx - qrSize) / 2 / cellTargetPx;
 
             btn.disabled = true; progressContainer.style.display = 'block'; fill.style.width = '0%';
 
@@ -414,47 +445,64 @@
                 try {
                     const workbook = new ExcelJS.Workbook();
                     const sheet = workbook.addWorksheet('QR Codes');
-                    let headers = isExcel ? [...excelHeader] : ['Data'];
-                    headers.push('QR Code Image');
+                    
+                    const headers = ['No.', 'Data', 'QR Code (200px)'];
                     sheet.addRow(headers);
+                    
                     sheet.getRow(1).font = { bold: true, size: 12 };
                     sheet.getRow(1).alignment = { vertical: 'middle', horizontal: 'center' };
+                    
+                    sheet.getColumn(1).width = 10;
+                    sheet.getColumn(2).width = 40;
+                    sheet.getColumn(3).width = colWidthChars; // Fixed 320px width
 
                     const total = globalData.length;
-                    const rowHeightPt = rowHeightPx * 0.75; 
-                    const colWidthChars = colWidthPx / 7;
 
                     for (let i = 0; i < total; i++) {
                         const originalRow = globalData[i];
-                        const textData = String(originalRow[colIndex] || "");
-                        const newRow = sheet.addRow([...originalRow]); 
-                        const rowNum = i + 2;
+                        const rawText = String(originalRow[colIndex] || "");
+                        const finalQRText = prefix + rawText + suffix;
+                        
+                        const rowNum = i + 2; 
+                        const indexNum = i + 1;
+                        
+                        const addedRow = sheet.addRow([indexNum, finalQRText]);
+                        
+                        // Set Row Height Fixed to 320px
                         sheet.getRow(rowNum).height = rowHeightPt;
+                        sheet.getCell(`A${rowNum}`).alignment = { vertical: 'middle', horizontal: 'center' };
+                        sheet.getCell(`B${rowNum}`).alignment = { vertical: 'middle', horizontal: 'left', wrapText: true };
 
-                        if (textData) {
+                        if (finalQRText) {
                             try {
-                                const qrDataUrl = await HeadlessQRCode.toDataURL(textData, { width: qrSize, margin: 1, errorCorrectionLevel: ecc });
+                                const qrDataUrl = await HeadlessQRCode.toDataURL(finalQRText, { 
+                                    width: qrSize, margin: 1, 
+                                    errorCorrectionLevel: ecc,
+                                    color: { dark: colorDark, light: colorLight }
+                                });
                                 const imageId = workbook.addImage({ base64: qrDataUrl, extension: 'png' });
-                                const colCount = headers.length; 
-                                sheet.addImage(imageId, { tl: { col: colCount - 1 + colOffset, row: rowNum - 1 + rowOffset }, ext: { width: qrSize, height: qrSize }, editAs: 'oneCell' });
-                                sheet.getCell(rowNum, colCount).alignment = { vertical: 'middle', horizontal: 'center' };
+                                
+                                sheet.addImage(imageId, { 
+                                    tl: { col: 2 + offsetRatio, row: rowNum - 1 + offsetRatio }, 
+                                    ext: { width: qrSize, height: qrSize }, 
+                                    editAs: 'oneCell' 
+                                });
                             } catch (e) { console.error("QR Gen Error", e); }
                         }
 
-                        if (i % 10 === 0 || i === total - 1) {
+                        if (i % 5 === 0 || i === total - 1) {
                             const percent = Math.round(((i + 1) / total) * 100);
                             fill.style.width = `${percent}%`;
                             txt.innerText = `Processing ${i + 1}/${total}...`;
                             await new Promise(r => setTimeout(r, 0));
                         }
                     }
-                    sheet.columns.forEach((column, index) => { if(index < headers.length - 1) column.width = 25; });
-                    sheet.getColumn(headers.length).width = colWidthChars;
 
                     txt.innerText = "Finalizing Excel file...";
                     const buffer = await workbook.xlsx.writeBuffer();
                     const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
                     saveAs(blob, `${filename}.xlsx`);
+                    
                     toast(i18n[curLang].msg_complete);
                     btn.disabled = false;
                 } catch (err) { toast("Error: " + err.message, "error"); btn.disabled = false; }
